@@ -36,6 +36,12 @@ RUN python ./setup.py --prefix=./blender  --verbose
 # Add Blender to the PATH
 ENV PATH="/app/blender/bbp-blender-3.5/blender-bbp:${PATH}"
 
+# Download neuromorphovis.py
+RUN wget -O neuromorphovis.py https://raw.githubusercontent.com/BlueBrain/NeuroMorphoVis/master/neuromorphovis.py
+
+# Make neuromorphovis.py executable
+RUN chmod +x neuromorphovis.py
+
 # Install Poetry for managing dependencies
 RUN pip install poetry==1.7.1
 
