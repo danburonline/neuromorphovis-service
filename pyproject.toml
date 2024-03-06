@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "neuromorphovis-service"
+version = "0.0.1"
+description = "Running NeuroMorphoVis as a web service."
+authors = ["Daniel Burger <daniel.burger@epfl.ch>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "==3.10.*"
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0.post1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.0"
+mypy = "^1.8.0"
+pytest = "^8.0.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
