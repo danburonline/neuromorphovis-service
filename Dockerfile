@@ -8,7 +8,6 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /app
 
-# Install wget, xz-utils, and necessary libraries for Blender
 # Install necessary libraries for Blender, wget, xz-utils, and libSM
 RUN apt-get update && apt-get install -y \
   wget \
@@ -22,18 +21,13 @@ RUN apt-get update && apt-get install -y \
   libxkbcommon0 \
   && rm -rf /var/lib/apt/lists/*
 
-# # Download and install Blender
-# RUN mkdir /usr/local/blender && \
-#   wget -O blender.tar.xz https://download.blender.org/release/Blender4.0/blender-4.0.0-linux-x64.tar.xz && \
-#   tar -xf blender.tar.xz -C /usr/local/blender --strip-components=1 && \
-#   rm blender.tar.xz
-
 # Install Neuromorphovis
 RUN wget https://raw.githubusercontent.com/BlueBrain/NeuroMorphoVis/master/setup.py
 RUN chmod +x setup.py
 
 # Create a folder called "blender" in /usr/local
 RUN mkdir blender
+
 # Change the access permissions of the folder to 777
 RUN chmod 777 blender
 
