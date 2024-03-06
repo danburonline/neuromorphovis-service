@@ -40,7 +40,7 @@ RUN chmod 777 blender
 RUN python ./setup.py --prefix=./blender  --verbose
 
 # Add Blender to the PATH
-ENV PATH="/usr/local/blender:${PATH}"
+ENV PATH="/app/blender/bbp-blender-3.5/blender-bbp:${PATH}"
 
 # Install Poetry for managing dependencies
 RUN pip install poetry==1.7.1
@@ -63,4 +63,4 @@ RUN mkdir /app/dist
 EXPOSE 8000
 
 # Run the server via Uvicorn
-CMD ["blender", "--version"]
+CMD ["uvicorn", "neuromorphovis_service.server:app", "--host", "0.0.0.0", "--port", "8000"]
