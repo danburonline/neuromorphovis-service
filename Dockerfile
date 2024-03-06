@@ -2,8 +2,8 @@
 FROM --platform=linux/amd64 python:3.10-slim
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set work directory
 WORKDIR /app
@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
   libxkbcommon0 \
   && rm -rf /var/lib/apt/lists/*
 
-# Install Neuromorphovis
+# Install Neuromorphovis setup script
 RUN wget https://raw.githubusercontent.com/BlueBrain/NeuroMorphoVis/master/setup.py
 RUN chmod +x setup.py
 
@@ -31,13 +31,26 @@ RUN mkdir blender
 # Change the access permissions of the folder to 777
 RUN chmod 777 blender
 
-RUN python ./setup.py --prefix=./blender  --verbose
+RUN python ./setup.py --prefix=./blender --verbose
 
 # Add Blender to the PATH
 ENV PATH="/app/blender/bbp-blender-3.5/blender-bbp:${PATH}"
 
-# Download neuromorphovis.py
-RUN wget -O neuromorphovis.py https://raw.githubusercontent.com/BlueBrain/NeuroMorphoVis/master/neuromorphovis.py
+# Install git
+RUN apt-get update && apt-get install -y git
+
+# Clone the specific branch of NeuroMorphoVis repo to temp directory
+RUN git clone --depth 1 https://github.com/BlueBrain/NeuroMorphoVis.git /temp/NeuroMorphoVis
+
+# Copy the nmv directory to the /app directory
+RUN cp -r /temp/NeuroMorphoVis/nmv /app/
+
+# Also copy neuromorphovis.py to the /app directory
+RUN cp /temp/NeuroMorphoVis/neuromorphovis.py /app/
+
+# Clean up
+RUN rm -rf /temp/NeuroMorphoVis
+RUN apt-get remove -y git && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Make neuromorphovis.py executable
 RUN chmod +x neuromorphovis.py
