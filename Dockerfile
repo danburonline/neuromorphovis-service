@@ -31,12 +31,13 @@ RUN mkdir blender
 # Change the access permissions of the folder to 777
 RUN chmod 777 blender
 
+# Run NeuroMorphoVis installation script
 RUN python ./setup.py --prefix=./blender --verbose
 
 # Add Blender to the PATH
 ENV PATH="/app/blender/bbp-blender-3.5/blender-bbp:${PATH}"
 
-# Install git
+# Install Git
 RUN apt-get update && apt-get install -y git
 
 # Clone the specific branch of NeuroMorphoVis repo to temp directory
