@@ -1,0 +1,40 @@
+{
+  "name": "Organoid Compiler",
+  "service": "devcontainer",
+  "dockerComposeFile": "docker-compose.yml",
+  "postCreateCommand": ".devcontainer/scripts/post_create.sh",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "charliermarsh.ruff",
+        "bungcip.better-toml",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "DavidAnson.vscode-markdownlint",
+        "ms-toolsai.vscode-jupyter-slideshow",
+        "ms-toolsai.vscode-jupyter-cell-tags",
+        "streetsidesoftware.code-spell-checker",
+        "bierner.markdown-preview-github-styles"
+      ],
+      "settings": {
+        "files.eol": "\n",
+        "editor.formatOnSave": true,
+        "notebook.lineNumbers": "on",
+        "notebook.output.wordWrap": true,
+        "notebook.output.scrolling": true,
+        "notebook.output.textLineLimit": 15,
+        "notebook.stickyScroll.enabled": true,
+        "notebook.formatOnSave.enabled": true,
+        "notebook.consolidatedRunButton": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "python.formatting.provider": "charliermarsh.ruff",
+        "notebook.showCellStatusBar": "visibleAfterExecute",
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+      }
+    }
+  },
+  "features": { "docker-from-docker": "latest", "git": "os-provided" }
+}
