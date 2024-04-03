@@ -28,4 +28,6 @@ Afterwards, this quick fix will allow you to export the soma mesh as an OBJ file
 
 ## How to Work with the API
 
-When you start the Docker container a FastAPI web server will boot up and be available under `http://localhost:8000`. You'll find Hoppscotch API requests inside the [`docs`](/docs/api-specs.json) directory as a JSON that you can import into the [Hoppscotch](https://hoppscotch.io) app. This will allow you to interact with the API and run the CLI scripts from the web interface.
+When you start the Docker container a FastAPI web server will boot up and be available under `http://localhost:8000`. You'll find Hoppscotch API requests inside the [`docs`](/docs/api/api-specs.json) directory as a JSON that you can import into the [Hoppscotch](https://hoppscotch.io) app. This will allow you to interact with the API and run the CLI scripts from the web interface.
+
+There are also [example morphology files](/docs/example/example-file.swc) that you can try out with the API.

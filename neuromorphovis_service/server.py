@@ -54,15 +54,13 @@ async def process_swc(file: UploadFile = File(...)):
         # Execute the command
         subprocess.run(command, check=True)
 
-        # Assume the script generates a file with a predictable name or pattern
-        # Adjust this pattern to match the script's output naming scheme
         generated_files = glob.glob(f"{output_directory}/*.obj")
         if not generated_files:
             raise HTTPException(
                 status_code=404, detail="OBJ file not found after processing."
             )
 
-        # Assuming there's only one .obj file, or you need the first one
+        # Get the path of the generated .obj file
         generated_obj_path = generated_files[0]
 
         # Construct the new file name
