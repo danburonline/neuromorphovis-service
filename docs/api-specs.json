@@ -1,0 +1,40 @@
+{
+  "v": 2,
+  "name": "NeuroMorphoVis Service",
+  "folders": [],
+  "requests": [
+    {
+      "endpoint": "http://localhost:8000/health",
+      "headers": [],
+      "name": "Check health",
+      "testScript": "",
+      "auth": { "authType": "inherit", "authActive": false },
+      "body": { "contentType": "multipart/form-data", "body": [] },
+      "params": [],
+      "v": "3",
+      "preRequestScript": "",
+      "method": "GET",
+      "requestVariables": []
+    },
+    {
+      "endpoint": "http://localhost:8000/process-swc",
+      "headers": [],
+      "name": "Upload SWC",
+      "testScript": "",
+      "auth": { "authType": "inherit", "authActive": true },
+      "body": {
+        "contentType": "multipart/form-data",
+        "body": [
+          { "key": "file", "value": [{}], "active": true, "isFile": true }
+        ]
+      },
+      "params": [],
+      "v": "3",
+      "preRequestScript": "",
+      "method": "POST",
+      "requestVariables": []
+    }
+  ],
+  "auth": { "authType": "none", "authActive": true },
+  "headers": []
+}
