@@ -14,9 +14,11 @@ services:
       - cached-virtual_env:/workspace/.venv
       # Cache Blender installation directory to speed up setup
       - blender_cache:/workspace/blender
+      # Cache Pip installation directory to speed up setup
+      - pip_cache:/root/.cache/pip
     command: sleep infinity # Keep the container running
-    # user: root
 
 volumes:
   cached-virtual_env:
   blender_cache:
+  pip_cache:

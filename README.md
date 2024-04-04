@@ -8,6 +8,7 @@ This repository contains a proof of concept for a Python web server to run the o
 
 1. VS Code with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed
 2. Docker installed and running on your machine
+3. Make sure you are connected to the EPFL VPN to download specific packages required for NeuroMorphoVis.
 
 ### Setup the Dev Container
 
@@ -25,7 +26,7 @@ This repository contains a proof of concept for a Python web server to run the o
 ### Example CLI Script
 
 ```bash
-python neuromorphovis.py --blender=blender/bbp-blender-3.5/blender-bbp/blender --input=file --morphology-file=files/example-morphology.swc --export-soma-mesh-blend --export-soma-mesh-obj --output-directory=$(pwd)/output
+python neuromorphovis.py --blender=blender/bbp-blender-3.5/blender-bbp/blender --input=file --morphology-file=docs/example/example-file.swc --export-soma-mesh-blend --export-soma-mesh-obj --output-directory=$(pwd)/output
 ```
 
 ## ⚠️ Quick Fixes

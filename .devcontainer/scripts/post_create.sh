@@ -1,13 +1,10 @@
 #!/bin/bash
 
-# Install Poetry
-curl -sSL https://install.python-poetry.org | python - --version 1.8.2
+# Modify permissions on the virtual env
+chmod -R 777 .venv
 
 # Configure Poetry to use local virtual envs
 poetry config virtualenvs.in-project true
-
-# Modify permissions on the virtual env
-sudo chmod -R 777 .venv
 
 # Install dependencies
 poetry install
@@ -16,10 +13,12 @@ poetry install
 wget https://raw.githubusercontent.com/BlueBrain/NeuroMorphoVis/master/setup.py
 chmod +x setup.py
 
-sudo chmod -R 777 blender
+chmod -R 777 blender
 
 python ./setup.py --prefix=./blender --verbose
-PATH="/workspace/blender/bbp-blender-3.5/blender-bbp:${PATH}"
+
+echo 'export PATH="/workspace/blender/bbp-blender-3.5/blender-bbp:${PATH}"' >> ~/.bashrc
+source ~/.bashrc
 
 # Create temporary folder for NeuroMorphoVis Python file installation
 mkdir temp
@@ -34,6 +33,3 @@ cp -r temp/NeuroMorphoVis/nmv . &&
   cp temp/NeuroMorphoVis/neuromorphovis.py . &&
   chmod +x neuromorphovis.py &&
   rm -rf temp/NeuroMorphoVis
-
-# activate the virtual environment
-poetry shell

@@ -12,6 +12,7 @@
         "charliermarsh.ruff",
         "bungcip.better-toml",
         "ms-toolsai.jupyter-keymap",
+        "ms-azuretools.vscode-docker",
         "ms-toolsai.jupyter-renderers",
         "DavidAnson.vscode-markdownlint",
         "ms-toolsai.vscode-jupyter-slideshow",
@@ -39,6 +40,11 @@
   "features": {
     "docker-from-docker": "latest",
     "git": "os-provided",
-    "ghcr.io/prulloac/devcontainer-features/bun:1": {}
+    "ghcr.io/prulloac/devcontainer-features/bun:1": {
+      "version": "1.1.0"
+    },
+    "ghcr.io/devcontainers-contrib/features/poetry:2": {
+      "version": "1.8.2"
+    }
   }
 }
