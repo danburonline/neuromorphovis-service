@@ -1,5 +1,5 @@
 {
-  "name": "Organoid Compiler",
+  "name": "NeuroMorphoVis Service",
   "service": "devcontainer",
   "dockerComposeFile": "docker-compose.yml",
   "postCreateCommand": ".devcontainer/scripts/post_create.sh",
@@ -36,5 +36,9 @@
       }
     }
   },
-  "features": { "docker-from-docker": "latest", "git": "os-provided" }
+  "features": {
+    "docker-from-docker": "latest",
+    "git": "os-provided",
+    "ghcr.io/prulloac/devcontainer-features/bun:1": {}
+  }
 }

@@ -215,3 +215,11 @@ ipython_config.py
 
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
+
+# NeuroMorphoVis specific things
+blender
+setup.py
+neuromorphovis.py
+temp
+nmv
+output

@@ -12,7 +12,11 @@ services:
       - ..:/workspace:cached
       # Cache dirs with lots of files to improve devcontainer performance
       - cached-virtual_env:/workspace/.venv
+      # Cache Blender installation directory to speed up setup
+      - blender_cache:/workspace/blender
     command: sleep infinity # Keep the container running
+    # user: root
 
 volumes:
   cached-virtual_env:
+  blender_cache:

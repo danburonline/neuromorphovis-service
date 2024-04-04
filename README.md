@@ -2,12 +2,25 @@
 
 This repository contains a proof of concept for a Python web server to run the open-source [NeuroMorphoVis](https://github.com/BlueBrain/NeuroMorphoVis) tool as a cloud service. It allows for physics-based reconstructions of neuronal soma cells and other morphological processes for analysis and simulations.
 
-## Quick Setup
+## Quick Start
+
+### Prerequisites
+
+1. VS Code with the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed
+2. Docker installed and running on your machine
+
+### Setup the Dev Container
+
+1. Open the repository in VS Code
+2. Click on the right bottom corner button and press `Reopen in Container`
+3. Wait for the Dev Container to build and start, this can take a few minutes if it's the first time
+
+## Run the NeuroMorphoVis Service
 
 1. Build the Docker container: `docker build -t neuromorphovis .`
 2. Run the Docker container: `docker run -p 8000:8000 neuromorphovis`
 3. Access the web server at `http://localhost:8000/health`
-4. CD into the Docker container and run CLI scripts.
+4. CD into the Docker container and run CLI scripts or access the API via `http://localhost:8000`
 
 ### Example CLI Script
 
