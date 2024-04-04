@@ -1,8 +1,4 @@
-# If you're on Linux computer
-# FROM python:3.10-slim
-
-# If you're on a Apple Silicon computer
-FROM --platform=linux/amd64 python:3.10-slim
+FROM python:3.10-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
