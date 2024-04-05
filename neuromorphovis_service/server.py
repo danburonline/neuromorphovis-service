@@ -28,7 +28,7 @@ async def process_swc(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, temp_file)
             temp_file_path = temp_file.name
 
-        # Define paths and command as before, without --output-filename
+        # Define paths
         current_directory = os.path.dirname(__file__)
         output_directory = os.path.join(current_directory, "..", "output", "meshes")
         script_path = os.path.abspath(
@@ -40,6 +40,7 @@ async def process_swc(file: UploadFile = File(...)):
             )
         )
 
+        # Define Blender command
         command = [
             "python",
             script_path,
@@ -54,34 +55,39 @@ async def process_swc(file: UploadFile = File(...)):
         # Execute the command
         subprocess.run(command, check=True)
 
+        # Check for the generated .obj file
         generated_files = glob.glob(f"{output_directory}/*.obj")
         if not generated_files:
             raise HTTPException(
                 status_code=404, detail="OBJ file not found after processing."
             )
 
-        # Get the path of the generated .obj file
         generated_obj_path = generated_files[0]
-
-        # Construct the new file name
-        new_obj_filename = (
-            f"{os.path.splitext(file.filename)[0]}_{short_uuid}_{timestamp}.obj"
-        )
+        new_obj_filename = f"{os.path.splitext(file.filename)[0]}_{short_uuid}_{timestamp}.obj"
         new_obj_path = os.path.join(output_directory, new_obj_filename)
-
-        # Rename the file
         os.rename(generated_obj_path, new_obj_path)
+
+        # Convert .obj to .gltf
+        new_gltf_filename = f"{os.path.splitext(file.filename)[0]}_{short_uuid}_{timestamp}.gltf"
+        new_gltf_path = os.path.join(output_directory, new_gltf_filename)
+        conversion_command = [
+            "bun", "x",
+            "obj2gltf",
+            "-i", new_obj_path,
+            "-o", new_gltf_path
+        ]
+        subprocess.run(conversion_command, check=True)
 
         # Cleanup
         files = glob.glob(f"{output_directory}/*")
         for f in files:
-            if f != new_obj_path:  # Keep the newly renamed .obj file
+            if f != new_gltf_path:  # Keep only the newly converted .gltf file
                 os.remove(f)
 
         return FileResponse(
-            path=new_obj_path,
-            media_type="application/wavefront-obj",
-            filename=new_obj_filename,
+            path=new_gltf_path,
+            media_type="model/gltf+json",
+            filename=new_gltf_filename,
         )
     finally:
         if temp_file_path and os.path.exists(temp_file_path):

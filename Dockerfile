@@ -11,6 +11,8 @@ WORKDIR /app
 # Install necessary libraries for Blender, wget, xz-utils, and libSM
 RUN apt-get update && apt-get install -y \
   wget \
+  unzip \
+  curl \
   libxi6 \
   libgl1 \
   libsm6 \
@@ -21,12 +23,26 @@ RUN apt-get update && apt-get install -y \
   libxkbcommon0 \
   && rm -rf /var/lib/apt/lists/*
 
+# Install Bun directly to a global location
+RUN curl -fsSL https://bun.sh/install | bash
+# Move Bun to a global location
+RUN mv /root/.bun/bin/bun /usr/local/bin/
+
+# Ensure the ENV PATH is correctly set
+ENV PATH="/usr/local/bin:${PATH}"
+
+# Now, Bun should be available globally; you can check with:
+RUN bun --version
+
 # Install Neuromorphovis setup script
 RUN wget https://raw.githubusercontent.com/BlueBrain/NeuroMorphoVis/master/setup.py
 RUN chmod +x setup.py
 
 # Create a folder called "blender" in /usr/local
 RUN mkdir blender
+
+# Create an output folder for the converted files
+RUN mkdir output
 
 # Change the access permissions of the folder to 777
 RUN chmod 777 blender
